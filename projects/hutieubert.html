@@ -247,11 +247,6 @@
         <section>
             <h2>Before Running the Code</h2>
             <p>HuTieuBERT depends on <strong>VnCoreNLP</strong> for Vietnamese word segmentation. Before running any tokenizer or model example in this repository, please download and set up VnCoreNLP following the official repository: <a href="https://github.com/vncorenlp/VnCoreNLP" target="_blank" rel="noopener">vncorenlp/VnCoreNLP</a>.</p>
-            <p>Recommended setup:</p>
-            <pre><code>pip install py_vncorenlp</code></pre>
-            <pre><code>import py_vncorenlp
-
-py_vncorenlp.download_model(save_dir="/absolute/path/to/vncorenlp")</code></pre>
             <p>Notes:</p>
             <ul>
                 <li>Java 1.8 or newer is required by VnCoreNLP.</li>
@@ -261,77 +256,9 @@ py_vncorenlp.download_model(save_dir="/absolute/path/to/vncorenlp")</code></pre>
         </section>
 
         <section>
-            <h2>Example Usage</h2>
-            <pre><code>import torch
-import torch.nn as nn
-from transformers.models.roberta.modeling_roberta import RobertaModel, RobertaEncoder, RobertaLayer
-from transformers import RobertaConfig
-
-from model.tokenizer import MorphemeAwareTokenizer
-from model.embeddings import BoundaryAwareEmbeddings
-from model.model import MorphemeAwareRobertaModel, MorphemeAwareRobertaForSequenceClassification
-
-tokenizer = MorphemeAwareTokenizer.from_pretrained(
-    "ducanhdinh/HuTieuBert",
-    vncorenlp_dir="/content/vncorenlp",
-    return_tensors="pt"
-)
-
-config = RobertaConfig.from_pretrained("ducanhdinh/HuTieuBert")
-
-# Applied Structural Bias Matrix to Layer 1 and 2 full 12 heads
-target_heads = {
-    1: list(range(config.num_attention_heads)),
-    2: list(range(config.num_attention_heads)),
-}
-
-model = MorphemeAwareRobertaForSequenceClassification(
-    config,
-    num_labels=label_num,
-    target_heads=target_heads,
-    alpha=0.5,
-    beta=-0.3,
-    gamma=0.0,
-    delta=0.0,
-)
-
-model.roberta = MorphemeAwareRobertaModel.from_pretrained(
-    "ducanhdinh/HuTieuBert",
-    target_heads=target_heads,
-    alpha=0.5,
-    beta=-0.3,
-    gamma=0.0,
-    delta=0.0,
-)
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.to(device)</code></pre>
-        </section>
-
-        <section>
             <h2>Acknowledgement</h2>
-
-            <h3>Paper (Coming Soon)</h3>
-            <p>The full paper describing our method and experimental results will be released soon. If you find this work useful, please consider citing our paper:</p>
-            <pre><code>@article{,
-  title   = {Coming Soon},
-  author  = {Coming Soon},
-  journal = {Coming Soon},
-  year    = {Coming Soon},
-}</code></pre>
-
-            <h3>Use of External Segmentation</h3>
-            <p>This work makes use of <strong>VnCoreNLP</strong> - a Vietnamese natural language processing toolkit.</p>
-            <p>Copyright (C) 2018-2019 VnCoreNLP<br>
-            This program is free software: you can redistribute it and/or modify<br>
-            it under the terms of the GNU General Public License as published by<br>
-            the Free Software Foundation, either version 3 of the License, or<br>
-            (at your option) any later version.</p>
-            <p>This program is distributed in the hope that it will be useful,<br>
-            but <strong>WITHOUT ANY WARRANTY</strong>; without even the implied warranty of<br>
-            <strong>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</strong><br>
-            See the <a href="https://www.gnu.org/licenses/" target="_blank" rel="noopener">GNU General Public License</a> for more details.</p>
-            <p>Repository: <a href="https://github.com/vncorenlp/VnCoreNLP" target="_blank" rel="noopener">https://github.com/vncorenlp/VnCoreNLP</a></p>
+            <p>If you find this work helpful, please consider citing our paper:</p>
+            <p>Full citation details will be updated after the camera-ready version is available.</p>
         </section>
     </div>
 </body>

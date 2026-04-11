@@ -61,25 +61,6 @@ function updateNavbarState() {
 // Navbar background change on scroll
 window.addEventListener('scroll', updateNavbarState);
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-up');
-        }
-    });
-}, observerOptions);
-
-// Observe all sections for animation
-document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
-});
-
 // Add loading animation to the page
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
@@ -206,33 +187,6 @@ function initFloatingParticles() {
     }
 }
 
-// 4. Enhanced Typing Animation
-function initEnhancedTyping() {
-    const heroTitle = document.querySelector('.hero-title');
-    if (!heroTitle) return;
-    
-    const text = heroTitle.textContent;
-    heroTitle.textContent = '';
-    heroTitle.style.borderRight = '2px solid #667eea';
-    
-    let i = 0;
-    function typeWriter() {
-        if (i < text.length) {
-            heroTitle.textContent += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 100);
-        } else {
-            // Remove cursor after typing is complete
-            setTimeout(() => {
-                heroTitle.style.borderRight = 'none';
-            }, 1000);
-        }
-    }
-    
-    // Start typing after a short delay
-    setTimeout(typeWriter, 1000);
-}
-
 // 5. Map Integration (using embedded iframe - no JavaScript needed)
 
 // 6. Enhanced Hover Effects
@@ -299,27 +253,6 @@ function initParallaxEffect() {
     });
 }
 
-// 8. Smooth Reveal Animations
-function initRevealAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('reveal');
-            }
-        });
-    }, observerOptions);
-    
-    // Observe all sections and cards
-    document.querySelectorAll('section, .research-card, .project-card, .educational-card, .media-item').forEach(el => {
-        observer.observe(el);
-    });
-}
-
 function initActiveNavLinks() {
     const navLinks = Array.from(document.querySelectorAll('.nav-menu a[href^="#"]'));
     const sections = navLinks
@@ -365,10 +298,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initDarkMode();
     updateNavbarState();
     initFloatingParticles();
-    initEnhancedTyping();
     initEnhancedHoverEffects();
     initParallaxEffect();
-    initRevealAnimations();
     initActiveNavLinks();
 });
 
